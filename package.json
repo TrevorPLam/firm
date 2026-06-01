@@ -17,6 +17,7 @@
     "@astrojs/cloudflare": "^13.6.0",
     "@astrojs/sitemap": "^3.7.3",
     "@neondatabase/serverless": "^1.1.0",
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.4.2",
     "astro-robots-txt": "^1.0.0",
