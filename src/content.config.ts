@@ -40,4 +40,18 @@ const caseStudies = defineCollection({
   }),
 });
 
-export const collections = { blog, services, caseStudies };
+const team = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),
+    role: z.string(),
+    bio: z.string(),
+    photo: z.string().optional(),
+    linkedin: z.string().optional(),
+    twitter: z.string().optional(),
+    order: z.number(),
+    locale: z.string().default('en'),
+  }),
+});
+
+export const collections = { blog, services, caseStudies, team };

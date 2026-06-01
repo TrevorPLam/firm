@@ -1,34 +1,90 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import TeamMember from '../components/TeamMember.astro';
+
+const teamMembers = (await getCollection('team'))
+  .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Layout title="About Us - Your Agency">
-  <main class="min-h-screen">
+  <main class="min-h-screen bg-[#050507]">
     <section class="px-6 py-20" aria-labelledby="about-heading">
       <div class="max-w-4xl mx-auto">
-        <h1 id="about-heading" class="text-4xl md:text-5xl font-bold mb-8">About Us</h1>
+        <h1 id="about-heading" class="text-4xl md:text-5xl font-bold mb-8 text-white">About Us</h1>
 
-        <div class="prose prose-lg max-w-none">
-          <p class="text-xl text-gray-600 mb-8">
+        <div class="prose prose-lg max-w-none prose-invert">
+          <p class="text-xl text-gray-300 mb-8">
             We are a digital marketing agency dedicated to helping businesses grow and succeed in the digital landscape.
           </p>
 
-          <h2 class="text-2xl font-bold mt-12 mb-4">Our Mission</h2>
-          <p class="text-gray-600 mb-6">
+          <h2 class="text-2xl font-bold mt-12 mb-4 text-white">Our Mission</h2>
+          <p class="text-gray-300 mb-6">
             To deliver exceptional digital marketing solutions that drive measurable results for our clients. We believe in data-driven strategies combined with creative excellence.
           </p>
 
-          <h2 class="text-2xl font-bold mt-12 mb-4">Our Values</h2>
-          <ul class="list-disc pl-6 text-gray-600 space-y-2">
+          <h2 class="text-2xl font-bold mt-12 mb-4 text-white">Our Values</h2>
+          <ul class="list-disc pl-6 text-gray-300 space-y-2">
             <li>Transparency in all our dealings</li>
             <li>Commitment to client success</li>
             <li>Continuous innovation and learning</li>
             <li>Collaborative approach to partnerships</li>
           </ul>
+        </div>
+      </div>
+    </section>
 
-          <h2 class="text-2xl font-bold mt-12 mb-4">Our Team</h2>
-          <p class="text-gray-600 mb-6">
-            Our team consists of experienced digital marketers, content strategists, SEO specialists, and creative professionals who are passionate about delivering results.
+    <section class="px-6 py-20 bg-[#0a0a0a]" aria-labelledby="team-heading">
+      <div class="max-w-6xl mx-auto">
+        <h2 id="team-heading" class="text-3xl md:text-4xl font-bold mb-12 text-white text-center">Our Team</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {teamMembers.map((member) => (
+            <TeamMember
+              name={member.data.name}
+              role={member.data.role}
+              bio={member.data.bio}
+              photo={member.data.photo}
+              linkedin={member.data.linkedin}
+              twitter={member.data.twitter}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-20" aria-labelledby="why-us-heading">
+      <div class="max-w-4xl mx-auto">
+        <h2 id="why-us-heading" class="text-3xl md:text-4xl font-bold mb-12 text-white text-center">Why Choose Us</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-[#111111] border border-white/10 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-white mb-3">Data-Driven Strategies</h3>
+            <p class="text-gray-400">Every decision we make is backed by data and analytics, ensuring your marketing budget delivers maximum ROI.</p>
+          </div>
+          <div class="bg-[#111111] border border-white/10 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-white mb-3">Proven Track Record</h3>
+            <p class="text-gray-400">Our portfolio speaks for itself with measurable results across multiple industries and business sizes.</p>
+          </div>
+          <div class="bg-[#111111] border border-white/10 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-white mb-3">Transparent Communication</h3>
+            <p class="text-gray-400">We believe in complete transparency with regular reporting and open lines of communication.</p>
+          </div>
+          <div class="bg-[#111111] border border-white/10 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-white mb-3">Customized Solutions</h3>
+            <p class="text-gray-400">No one-size-fits-all approaches. We tailor our strategies to your unique business goals and challenges.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 py-20 bg-[#0a0a0a]" aria-labelledby="culture-heading">
+      <div class="max-w-4xl mx-auto">
+        <h2 id="culture-heading" class="text-3xl md:text-4xl font-bold mb-8 text-white text-center">Our Culture</h2>
+        <div class="prose prose-lg max-w-none prose-invert">
+          <p class="text-gray-300 mb-6 text-center">
+            We foster a culture of continuous learning, collaboration, and innovation. Our team thrives on solving complex challenges and celebrating each other's successes. We believe that a happy team delivers the best results for our clients.
+          </p>
+          <p class="text-gray-300 text-center">
+            Regular team events, knowledge-sharing sessions, and a supportive environment ensure that everyone at our agency has the opportunity to grow professionally and personally.
           </p>
         </div>
       </div>
