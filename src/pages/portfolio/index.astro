@@ -1,0 +1,182 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PortfolioCard from '../../components/PortfolioCard.astro';
+import { getCollection } from 'astro:content';
+
+const allCaseStudies = await getCollection('caseStudies');
+const caseStudies = allCaseStudies.map((study) => ({
+  ...study,
+  slug: study.id.replace(/\.md$/, ''),
+}));
+
+// Get unique values for filters
+const industries = [...new Set(caseStudies.map((s) => s.data.industry))];
+const services = [...new Set(caseStudies.map((s) => s.data.service))];
+---
+
+<Layout
+  title="Portfolio - Your Agency"
+  description="See our work and results. Case studies showcasing digital marketing success across industries."
+>
+  <main class="min-h-screen bg-[#050507]">
+    <!-- Hero Section -->
+    <section
+      class="py-20 px-6"
+      aria-labelledby="portfolio-heading"
+    >
+      <div class="max-w-6xl mx-auto text-center">
+        <h1
+          id="portfolio-heading"
+          class="text-4xl md:text-5xl font-bold text-white mb-6"
+        >
+          Our Work
+        </h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+          Explore our case studies to see how we've helped businesses achieve their marketing goals across various industries.
+        </p>
+      </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section
+      class="py-8 px-6 border-b border-white/10"
+      aria-labelledby="filter-heading"
+    >
+      <div class="max-w-6xl mx-auto">
+        <h2 id="filter-heading" class="sr-only">
+          Filter Case Studies
+        </h2>
+        <div class="flex flex-wrap gap-3 justify-center">
+          <button
+            class="filter-btn active px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            data-filter="all"
+            aria-pressed="true"
+          >
+            All
+          </button>
+          {industries.map((industry) => (
+            <button
+              class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              data-filter={`industry-${industry}`}
+              aria-pressed="false"
+            >
+              {industry}
+            </button>
+          ))}
+          {services.map((service) => (
+            <button
+              class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              data-filter={`service-${service}`}
+              aria-pressed="false"
+            >
+              {service}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies Grid -->
+    <section
+      class="py-12 px-6"
+      aria-labelledby="case-studies-heading"
+    >
+      <div class="max-w-6xl mx-auto">
+        <h2 id="case-studies-heading" class="sr-only">
+          Case Studies
+        </h2>
+        <div id="case-studies-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {caseStudies.map((study) => (
+            <PortfolioCard
+              title={study.data.title}
+              client={study.data.client}
+              industry={study.data.industry}
+              outcome={study.data.outcome}
+              resultMetric={study.data.resultMetric}
+              heroImage={study.data.heroImage}
+              slug={study.slug}
+              data-industry={study.data.industry}
+              data-service={study.data.service}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section
+      class="py-20 px-6"
+      aria-labelledby="cta-heading"
+    >
+      <div class="max-w-4xl mx-auto text-center bg-[#111111] border border-white/10 rounded-xl p-12">
+        <h2 id="cta-heading" class="text-3xl font-bold text-white mb-4">
+          Want Results Like These?
+        </h2>
+        <p class="text-gray-400 mb-8">
+          Contact us today to discuss how we can help you achieve similar success with your digital marketing.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-3 rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#111111]"
+        >
+          Start Your Project
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .filter-btn {
+    background-color: #111111;
+    color: #9ca3af;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .filter-btn:hover {
+    background-color: #1a1a1a;
+    color: white;
+  }
+
+  .filter-btn.active {
+    background-color: #0066ff;
+    color: white;
+    border-color: #0066ff;
+  }
+
+  .filter-btn:focus-visible {
+    outline: 2px solid #0066ff;
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const caseStudyCards = document.querySelectorAll('[data-industry]');
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      // Update active state
+      filterButtons.forEach((btn) => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+      });
+      button.classList.add('active');
+      button.setAttribute('aria-pressed', 'true');
+
+      // Filter cards
+      const filter = button.dataset.filter;
+      caseStudyCards.forEach((card) => {
+        if (filter === 'all') {
+          card.style.display = 'block';
+        } else if (filter.startsWith('industry-')) {
+          const industry = filter.replace('industry-', '');
+          card.style.display = card.dataset.industry === industry ? 'block' : 'none';
+        } else if (filter.startsWith('service-')) {
+          const service = filter.replace('service-', '');
+          card.style.display = card.dataset.service === service ? 'block' : 'none';
+        }
+      });
+    });
+  });
+</script>
