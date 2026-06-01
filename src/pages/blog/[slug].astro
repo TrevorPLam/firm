@@ -6,7 +6,7 @@ import type { CollectionEntry } from 'astro:content';
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 }
@@ -16,14 +16,14 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = post.rendered;
 
 const blogPostingSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: post.data.title,
   description: post.data.description,
-  image: post.data.image ? new URL(post.data.image, Astro.site).href : undefined,
+  image: post.data.heroImage ? new URL(post.data.heroImage, Astro.site).href : undefined,
   author: {
     "@type": "Organization",
     name: "Your Agency",
