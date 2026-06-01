@@ -300,8 +300,18 @@ npm run build
 
 ### Task HPR-004: Update Navigation Structure
 
-**Status:** TODO  
-**Related Files:** `src/components/Navigation.astro`
+**Status:** DONE
+**Related Files:** `src/components/Navigation.astro`, `src/components/Footer.astro`
+
+**Implementation Notes:**
+- Added "Services" link to navLinks array in Navigation.astro (href: "/services", label: "Services")
+- Added "Portfolio" link to navLinks array in Navigation.astro (href: "/portfolio", label: "Portfolio")
+- Links positioned between "About" and "Blog" as specified
+- Both desktop and mobile navigation include the new links (shared navLinks array)
+- Updated footerLinks array in Footer.astro to match navigation structure
+- Navigation now has 6 items total (within the 6-7 maximum limit)
+- Accessibility maintained (aria-current, aria-label, role attributes)
+- Build validation passed successfully
 
 **Definition of Done:**
 Navigation updated to include Services and Portfolio links. Navigation follows predictable grouping (Home, Services, Portfolio, About, Blog, Contact). Mobile menu includes all navigation items. Active states properly implemented. Accessibility maintained (aria-current, aria-label).
@@ -326,7 +336,7 @@ Import: LanguageSwitcher from './LanguageSwitcher.astro'. Export: Default compon
 
 ---
 
-#### Subtask HPR-004-01: Add Services and Portfolio Links to Navigation
+#### Subtask HPR-004-01: Add Services and Portfolio Links to Navigation ✅
 
 **Target File:** `src/components/Navigation.astro`
 
