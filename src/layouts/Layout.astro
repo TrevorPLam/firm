@@ -52,6 +52,11 @@ const finalSchema = schema
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
+    <!-- Performance: Preconnect to external domains -->
+    {import.meta.env.PUBLIC_GA_ID && (
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+    )}
+    
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
     

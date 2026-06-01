@@ -28,4 +28,16 @@ export default defineConfig({
       sitemap: import.meta.env.SITE_URL ? `${import.meta.env.SITE_URL}/sitemap-index.xml` : undefined,
     }),
   ],
+  image: {
+    // Configure image optimization with sharp service
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {},
+    },
+  },
+  build: {
+    // Enable inline stylesheets for critical CSS
+    inlineStylesheets: 'auto',
+  },
+  compressHTML: true,
 });
