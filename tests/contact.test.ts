@@ -32,7 +32,7 @@ describe('contact API', () => {
   });
 
   it('should return 400 when required fields are missing', async () => {
-    const { POST } = await import('./contact');
+    const { POST } = await import('../src/pages/api/contact');
     const mockContext = createMockContext(new FormData());
 
     const response = await POST(mockContext);
@@ -43,8 +43,8 @@ describe('contact API', () => {
   });
 
   it('should return 200 when all fields are provided', async () => {
-    const { POST } = await import('./contact');
-    const { sql } = await import('../../lib/neon');
+    const { POST } = await import('../src/pages/api/contact');
+    const { sql } = await import('../src/lib/neon');
 
     const formData = new FormData();
     formData.append('name', 'Test User');
@@ -65,8 +65,8 @@ describe('contact API', () => {
   });
 
   it('should store submission in database', async () => {
-    const { POST } = await import('./contact');
-    const { sql } = await import('../../lib/neon');
+    const { POST } = await import('../src/pages/api/contact');
+    const { sql } = await import('../src/lib/neon');
 
     const formData = new FormData();
     formData.append('name', 'Test User');
@@ -84,8 +84,8 @@ describe('contact API', () => {
   });
 
   it('should return 500 on database error', async () => {
-    const { POST } = await import('./contact');
-    const { sql } = await import('../../lib/neon');
+    const { POST } = await import('../src/pages/api/contact');
+    const { sql } = await import('../src/lib/neon');
 
     const formData = new FormData();
     formData.append('name', 'Test User');
@@ -105,8 +105,8 @@ describe('contact API', () => {
   });
 
   it('should handle invalid email format gracefully', async () => {
-    const { POST } = await import('./contact');
-    const { sql } = await import('../../lib/neon');
+    const { POST } = await import('../src/pages/api/contact');
+    const { sql } = await import('../src/lib/neon');
 
     const formData = new FormData();
     formData.append('name', 'Test User');
@@ -127,7 +127,7 @@ describe('contact API', () => {
   });
 
   it('should handle empty fields as missing', async () => {
-    const { POST } = await import('./contact');
+    const { POST } = await import('../src/pages/api/contact');
 
     const formData = new FormData();
     formData.append('name', '');
@@ -145,8 +145,8 @@ describe('contact API', () => {
   });
 
   it('should handle long message content', async () => {
-    const { POST } = await import('./contact');
-    const { sql } = await import('../../lib/neon');
+    const { POST } = await import('../src/pages/api/contact');
+    const { sql } = await import('../src/lib/neon');
 
     const formData = new FormData();
     formData.append('name', 'Test User');
@@ -166,8 +166,8 @@ describe('contact API', () => {
   });
 
   it('should handle special characters in message', async () => {
-    const { POST } = await import('./contact');
-    const { sql } = await import('../../lib/neon');
+    const { POST } = await import('../src/pages/api/contact');
+    const { sql } = await import('../src/lib/neon');
 
     const formData = new FormData();
     formData.append('name', 'Test User');

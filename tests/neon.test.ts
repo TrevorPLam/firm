@@ -12,7 +12,7 @@ describe('neon client', () => {
   });
 
   it('should export sql client', async () => {
-    const { sql } = await import('./neon');
+    const { sql } = await import('../src/lib/neon');
 
     expect(sql).toBeDefined();
     expect(typeof sql).toBe('function');
