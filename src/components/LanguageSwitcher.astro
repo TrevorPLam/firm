@@ -1,0 +1,39 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+interface Props {
+  currentLocale?: string;
+}
+
+const { currentLocale = 'en' } = Astro.props;
+
+const locales = [
+  { code: 'en', label: 'EN' },
+  { code: 'es', label: 'ES' },
+  { code: 'fr', label: 'FR' },
+  { code: 'de', label: 'DE' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<div aria-label="Language switcher" class="flex items-center space-x-2">
+  {locales.map((locale) => {
+    const url = getRelativeLocaleUrl(locale.code, currentPath);
+    const isActive = locale.code === currentLocale;
+    return (
+      <a
+        href={url}
+        aria-label={`Switch to ${locale.label}`}
+        aria-current={isActive ? 'true' : undefined}
+        class={`px-3 py-1 text-sm font-medium rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 ${
+          isActive
+            ? 'bg-blue-600 text-white'
+            : 'text-gray-600 hover:bg-gray-100 hover:text-blue-600'
+        }`}
+      >
+        {locale.label}
+      </a>
+    );
+  })}
+</div>

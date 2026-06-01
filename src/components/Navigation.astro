@@ -1,9 +1,12 @@
 ---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
 interface Props {
   siteName?: string;
+  currentLocale?: string;
 }
 
-const { siteName = "Your Agency" } = Astro.props;
+const { siteName = "Your Agency", currentLocale = "en" } = Astro.props;
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -33,6 +36,7 @@ const navLinks = [
             {link.label}
           </a>
         ))}
+        <LanguageSwitcher currentLocale={currentLocale} />
       </div>
 
       <!-- Mobile Menu Button -->
@@ -78,6 +82,9 @@ const navLinks = [
             {link.label}
           </a>
         ))}
+        <div class="pt-2 border-t border-gray-200">
+          <LanguageSwitcher currentLocale={currentLocale} />
+        </div>
       </div>
     </div>
   </div>

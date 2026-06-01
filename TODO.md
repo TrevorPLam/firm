@@ -271,8 +271,8 @@
 
 ## I18N LANGUAGE SWITCHER
 
-- [ ] TASK-I18N-001 | Status: PENDING
-  - Related Files: `src/components/LanguageSwitcher.astro`, `src/layouts/Layout.astro`
+- [x] TASK-I18N-001 | Status: COMPLETED
+  - Related Files: `src/components/LanguageSwitcher.astro`, `src/layouts/Layout.astro`, `src/components/Navigation.astro`
   - Definition of Done: Language switcher component that changes locale
   - Out of Scope: Automatic language detection, RTL support
   - Rules to Follow: Use Astro i18n routing, preserve current path
@@ -290,15 +290,25 @@
     ```
 
   - Subtask: TASK-I18N-001-A | File: `src/components/LanguageSwitcher.astro`
-    - Create LanguageSwitcher component
-    - Add buttons for en, es, fr, de
-    - Use Astro.getRelativeLocaleURL() for links
-    - Style with TailwindCSS
+    - ✅ Create LanguageSwitcher component
+    - ✅ Add buttons for en, es, fr, de
+    - ✅ Use Astro.getRelativeLocaleURL() for links
+    - ✅ Style with TailwindCSS
 
   - Subtask: TASK-I18N-001-B | File: `src/layouts/Layout.astro`
-    - Import LanguageSwitcher
-    - Add to Navigation or separate location
-    - Pass current locale as prop
+    - ✅ Import LanguageSwitcher
+    - ✅ Add to Navigation or separate location
+    - ✅ Pass current locale as prop
+
+  - Implementation Notes:
+    - Created LanguageSwitcher component using getRelativeLocaleUrl() from astro:i18n
+    - Component accepts currentLocale prop to highlight active language
+    - Integrated into Navigation component for both desktop and mobile views
+    - Added accessible ARIA labels (aria-label, aria-current) for keyboard navigation
+    - Used electric blue (#0066ff) for active state and focus rings
+    - 150ms transition duration following motion hierarchy
+    - Language switcher preserves current path when switching locales
+    - Build completed successfully with no type errors
 
 ---
 
