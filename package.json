@@ -1,0 +1,29 @@
+{
+  "name": "firm",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "generate-types": "wrangler types"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^13.6.0",
+    "@astrojs/sitemap": "^3.7.3",
+    "@neondatabase/serverless": "^1.1.0",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.4.2",
+    "astro-robots-txt": "^1.0.0",
+    "dotenv": "^17.4.2",
+    "tailwindcss": "^4.3.0",
+    "wrangler": "^4.95.0"
+  },
+  "overrides": {
+    "vite": "^7"
+  }
+}
