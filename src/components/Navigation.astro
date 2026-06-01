@@ -8,6 +8,8 @@ interface Props {
 
 const { siteName = "Your Agency", currentLocale = "en" } = Astro.props;
 
+const currentPath = Astro.url.pathname;
+
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -20,7 +22,11 @@ const navLinks = [
   <div class="max-w-6xl mx-auto px-6">
     <div class="flex items-center justify-between h-16">
       <!-- Logo Slot -->
-      <a href="/" class="flex items-center space-x-2">
+      <a
+        href="/"
+        class="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded"
+        aria-label={`${siteName} - Home`}
+      >
         <slot name="logo">
           <span class="text-xl font-bold text-gray-900">{siteName}</span>
         </slot>
@@ -28,14 +34,22 @@ const navLinks = [
 
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
-        {navLinks.map((link) => (
-          <a
-            href={link.href}
-            class="text-gray-600 hover:text-blue-600 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded"
-          >
-            {link.label}
-          </a>
-        ))}
+        {navLinks.map((link) => {
+          const isActive = currentPath === link.href;
+          return (
+            <a
+              href={link.href}
+              class={`transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded ${
+                isActive
+                  ? "text-blue-600 font-medium"
+                  : "text-gray-600 hover:text-blue-600"
+              }`}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          );
+        })}
         <LanguageSwitcher currentLocale={currentLocale} />
       </div>
 
@@ -73,15 +87,23 @@ const navLinks = [
       aria-labelledby="mobile-menu-button"
     >
       <div class="flex flex-col space-y-2">
-        {navLinks.map((link) => (
-          <a
-            href={link.href}
-            class="px-3 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600 rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
-            role="menuitem"
-          >
-            {link.label}
-          </a>
-        ))}
+        {navLinks.map((link) => {
+          const isActive = currentPath === link.href;
+          return (
+            <a
+              href={link.href}
+              class={`px-3 py-2 rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 ${
+                isActive
+                  ? "bg-blue-50 text-blue-600 font-medium"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-blue-600"
+              }`}
+              role="menuitem"
+              aria-current={isActive ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          );
+        })}
         <div class="pt-2 border-t border-gray-200">
           <LanguageSwitcher currentLocale={currentLocale} />
         </div>

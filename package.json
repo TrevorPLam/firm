@@ -29,5 +29,8 @@
   },
   "overrides": {
     "vite": "^7"
+  },
+  "devDependencies": {
+    "@axe-core/cli": "^4.11.3"
   }
 }
