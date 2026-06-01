@@ -624,6 +624,17 @@
 
 ---
 
+## ISSUES DISCOVERED
+
+- [ ] ISSUE-001 | Status: PENDING
+  - Related Files: `src/content.config.ts`, `src/content/blog/`
+  - Description: Blog collection does not exist or is empty, causing build warnings
+  - Priority: Medium
+  - Depends On: None
+  - Resolution: Configure content collections or create initial blog content (see TASK-CONTENT-001)
+
+---
+
 ## TASK DEPENDENCY GRAPH
 
 ```
