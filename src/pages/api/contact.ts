@@ -1,4 +1,5 @@
 import { sql } from '../../lib/neon';
+import { Resend } from 'resend';
 import type { APIRoute } from 'astro';
 
 export const POST: APIRoute = async ({ request }) => {
@@ -23,16 +24,26 @@ export const POST: APIRoute = async ({ request }) => {
       VALUES (${name}, ${email}, ${subject}, ${message}, NOW())
     `;
 
-    // Send email (placeholder - configure with your email service)
-    // You can use Resend, SendGrid, or any email service
-    // Example with Resend:
-    // const resend = new Resend(import.meta.env.RESEND_API_KEY);
-    // await resend.emails.send({
-    //   from: import.meta.env.EMAIL_FROM,
-    //   to: import.meta.env.EMAIL_TO,
-    //   subject: `Contact Form: ${subject}`,
-    //   html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`
-    // });
+    // Send email using Resend
+    const resend = new Resend(import.meta.env.RESEND_API_KEY);
+    const emailResult = await resend.emails.send({
+      from: import.meta.env.EMAIL_FROM || 'noreply@your-domain.com',
+      to: import.meta.env.EMAIL_TO || 'contact@your-domain.com',
+      subject: `Contact Form: ${subject}`,
+      html: `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `
+    });
+
+    if (emailResult.error) {
+      console.error('Email send error:', emailResult.error);
+      // Return success even if email fails (data is stored in database)
+      // but log the error for monitoring
+    }
 
     return new Response(
       JSON.stringify({ success: true, message: 'Message sent successfully' }),

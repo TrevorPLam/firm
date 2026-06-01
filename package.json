@@ -21,6 +21,7 @@
     "astro": "^6.4.2",
     "astro-robots-txt": "^1.0.0",
     "dotenv": "^17.4.2",
+    "resend": "^6.12.4",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
     "wrangler": "^4.95.0"
