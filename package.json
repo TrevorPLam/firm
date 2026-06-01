@@ -13,6 +13,7 @@
     "generate-types": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/cloudflare": "^13.6.0",
     "@astrojs/sitemap": "^3.7.3",
     "@neondatabase/serverless": "^1.1.0",
@@ -21,6 +22,7 @@
     "astro-robots-txt": "^1.0.0",
     "dotenv": "^17.4.2",
     "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3",
     "wrangler": "^4.95.0"
   },
   "overrides": {

@@ -4,6 +4,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_GA_ID?: string;
   readonly EMAIL_FROM?: string;
   readonly EMAIL_TO?: string;
+  readonly RESEND_API_KEY?: string;
 }
 
 interface ImportMeta {
