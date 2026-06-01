@@ -1681,3 +1681,52 @@ Verify production site: check all pages load correctly, verify SEO meta tags, ru
 
 **Validation Commands:**
 N/A (manual verification in browser)
+
+---
+
+## Technical Debt
+
+### Task TD-001: Fix Navigation.astro TypeScript Errors
+
+**Status:** TODO
+**Related Files:** `src/components/Navigation.astro`
+
+**Description:**
+Fix two TypeScript errors in Navigation.astro:
+1. Line 63: client:load directive causing type error with ButtonHTMLAttributes
+2. Line 122: setAttribute expects string but receives boolean for aria-expanded
+
+**Validation Commands:**
+```bash
+npm run astro check
+```
+
+---
+
+### Task TD-002: Fix blog/[slug].astro TypeScript Error
+
+**Status:** TODO
+**Related Files:** `src/pages/blog/[slug].astro`
+
+**Description:**
+Fix TypeScript error on line 19: Property 'Content' does not exist on type 'RenderedContent | undefined'. Need to handle undefined case or fix type assertion.
+
+**Validation Commands:**
+```bash
+npm run astro check
+```
+
+---
+
+### Task TD-003: Fix Content Collection Blog Warning
+
+**Status:** TODO
+**Related Files:** `src/content.config.ts`, `src/content/blog/`
+
+**Description:**
+Build warning: "The collection 'blog' does not exist or is empty." Despite 11 blog files existing, Content Collection is not properly configured or synced. Investigate and fix.
+
+**Validation Commands:**
+```bash
+npm run build
+```
