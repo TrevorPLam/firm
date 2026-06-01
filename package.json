@@ -10,7 +10,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "generate-types": "wrangler types"
+    "generate-types": "wrangler types",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
@@ -31,6 +34,8 @@
     "vite": "^7"
   },
   "devDependencies": {
-    "@axe-core/cli": "^4.11.3"
+    "@axe-core/cli": "^4.11.3",
+    "@vitest/ui": "^4.1.7",
+    "vitest": "^4.1.7"
   }
 }
