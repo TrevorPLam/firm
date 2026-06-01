@@ -3,12 +3,14 @@ import "../styles/global.css";
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+import StructuredData from "../components/StructuredData.astro";
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
   locale?: string;
+  schema?: Record<string, unknown>;
 }
 
 const {
@@ -16,9 +18,30 @@ const {
   description = "Your Agency - Digital Marketing Excellence",
   image = "/og-image.jpg",
   locale = "en",
+  schema,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Base organization schema
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Your Agency",
+  url: Astro.site,
+  logo: new URL("/favicon.svg", Astro.site),
+  description: "Digital Marketing Excellence",
+  sameAs: [
+    "https://twitter.com/youragency",
+    "https://linkedin.com/company/youragency",
+    "https://github.com/youragency",
+  ],
+};
+
+// Merge base schema with page-specific schema
+const finalSchema = schema
+  ? { ...organizationSchema, ...schema }
+  : organizationSchema;
 ---
 
 <!doctype html>
@@ -62,6 +85,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         gtag('config', gaId);
       </script>
     )}
+    
+    <!-- Structured Data -->
+    <StructuredData schema={finalSchema} />
   </head>
   <body class="bg-white text-gray-900 antialiased">
     <Navigation siteName="Your Agency" currentLocale={locale} />

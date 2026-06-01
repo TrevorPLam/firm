@@ -1,8 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Your Agency",
+  url: new URL("/", Astro.site).href,
+  description: "Digital Marketing Excellence",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: new URL("/search?q={search_term_string}", Astro.site).href,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
 ---
 
-<Layout title="Home - Your Agency">
+<Layout 
+  title="Home - Your Agency"
+  schema={webSiteSchema}
+>
   <main class="min-h-screen">
     <!-- Hero Section -->
     <section class="px-6 py-20 md:py-32">

@@ -17,11 +17,39 @@ interface Props {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+const blogPostingSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  image: post.data.image ? new URL(post.data.image, Astro.site).href : undefined,
+  author: {
+    "@type": "Person",
+    name: post.data.author || "Your Agency",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Your Agency",
+    logo: {
+      "@type": "ImageObject",
+      url: new URL("/favicon.svg", Astro.site).href,
+    },
+  },
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: post.data.updatedDate?.toISOString() || post.data.pubDate.toISOString(),
+  url: new URL(Astro.url.pathname, Astro.site).href,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": new URL(Astro.url.pathname, Astro.site).href,
+  },
+};
 ---
 
 <Layout 
   title={`${post.data.title} - Your Agency`}
   description={post.data.description}
+  schema={blogPostingSchema}
 >
   <main class="min-h-screen">
     <article class="px-6 py-20">
