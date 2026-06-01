@@ -103,4 +103,86 @@ describe('contact API', () => {
     expect(response.status).toBe(500);
     expect(data.error).toBe('Failed to send message');
   });
+
+  it('should handle invalid email format gracefully', async () => {
+    const { POST } = await import('./contact');
+    const { sql } = await import('../../lib/neon');
+
+    const formData = new FormData();
+    formData.append('name', 'Test User');
+    formData.append('email', 'invalid-email');
+    formData.append('subject', 'Test Subject');
+    formData.append('message', 'Test Message');
+
+    const mockContext = createMockContext(formData);
+
+    vi.mocked(sql).mockResolvedValue([]);
+
+    const response = await POST(mockContext);
+    const data = await response.json();
+
+    // The API doesn't validate email format, so it should still process
+    expect(response.status).toBe(200);
+    expect(data.success).toBe(true);
+  });
+
+  it('should handle empty fields as missing', async () => {
+    const { POST } = await import('./contact');
+
+    const formData = new FormData();
+    formData.append('name', '');
+    formData.append('email', '');
+    formData.append('subject', '');
+    formData.append('message', '');
+
+    const mockContext = createMockContext(formData);
+
+    const response = await POST(mockContext);
+    const data = await response.json();
+
+    expect(response.status).toBe(400);
+    expect(data.error).toBe('All fields are required');
+  });
+
+  it('should handle long message content', async () => {
+    const { POST } = await import('./contact');
+    const { sql } = await import('../../lib/neon');
+
+    const formData = new FormData();
+    formData.append('name', 'Test User');
+    formData.append('email', 'test@example.com');
+    formData.append('subject', 'Test Subject');
+    formData.append('message', 'A'.repeat(10000)); // Very long message
+
+    const mockContext = createMockContext(formData);
+
+    vi.mocked(sql).mockResolvedValue([]);
+
+    const response = await POST(mockContext);
+    const data = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(data.success).toBe(true);
+  });
+
+  it('should handle special characters in message', async () => {
+    const { POST } = await import('./contact');
+    const { sql } = await import('../../lib/neon');
+
+    const formData = new FormData();
+    formData.append('name', 'Test User');
+    formData.append('email', 'test@example.com');
+    formData.append('subject', 'Test Subject');
+    formData.append('message', 'Message with <script>alert("xss")</script> and special chars: @#$%^&*()');
+
+    const mockContext = createMockContext(formData);
+
+    vi.mocked(sql).mockResolvedValue([]);
+
+    const response = await POST(mockContext);
+    const data = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(data.success).toBe(true);
+  });
 });
