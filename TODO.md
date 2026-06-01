@@ -132,8 +132,19 @@ npm run build
 
 ### Task HPR-002: Create CaseStudyCard Component
 
-**Status:** TODO  
+**Status:** DONE
 **Related Files:** `src/components/CaseStudyCard.astro`
+
+**Implementation Notes:**
+- Created TypeScript interface for props: clientName, challenge, result, resultMetric, slug, clientLogo (optional)
+- Implemented semantic HTML structure with article element, role="article", and descriptive aria-label
+- Applied TailwindCSS styling following visual-identity.md: bg-[#111111], border-white/10, rounded-xl, p-6
+- Added hover effect with hover:border-blue-500/50 and 150ms transition duration (Quiet level motion)
+- Implemented focus states with electric blue ring for keyboard navigation
+- Used absolute overlay link for full card clickability with proper aria-label
+- Conditional rendering for optional clientLogo with fallback to h3 for clientName
+- All text colors meet WCAG 2.2 AA contrast requirements (4.5:1 minimum)
+- Build validation passed successfully
 
 **Definition of Done:**
 Reusable CaseStudyCard component created. Component accepts props: clientName, challenge, result, resultMetric, slug. Component renders card with proper semantic HTML. Responsive design (mobile-first). Accessibility attributes included. Styled with TailwindCSS following visual-identity.md.
@@ -158,7 +169,7 @@ Import: Image from 'astro:assets' (if using images). Export: Default component w
 
 ---
 
-#### Subtask HPR-002-01: Define TypeScript Interface
+#### Subtask HPR-002-01: Define TypeScript Interface ✅
 
 **Target File:** `src/components/CaseStudyCard.astro`
 
@@ -172,7 +183,7 @@ npm run astro check
 
 ---
 
-#### Subtask HPR-002-02: Implement Card HTML Structure
+#### Subtask HPR-002-02: Implement Card HTML Structure ✅
 
 **Target File:** `src/components/CaseStudyCard.astro`
 
@@ -187,7 +198,7 @@ npm run build
 
 ---
 
-#### Subtask HPR-002-03: Apply TailwindCSS Styling
+#### Subtask HPR-002-03: Apply TailwindCSS Styling ✅
 
 **Target File:** `src/components/CaseStudyCard.astro`
 

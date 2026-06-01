@@ -1,0 +1,75 @@
+---
+interface Props {
+  clientName: string;
+  challenge: string;
+  result: string;
+  resultMetric: string;
+  slug: string;
+  clientLogo?: string;
+}
+
+const { clientName, challenge, result, resultMetric, slug, clientLogo } = Astro.props;
+
+const ariaLabel = `Case study for ${clientName}: ${challenge}. Result: ${resultMetric}`;
+---
+
+<article
+  class="group relative bg-[#111111] border border-white/10 rounded-xl p-6 transition-colors duration-150 hover:border-blue-500/50 focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2 focus-within:ring-offset-[#050507]"
+  role="article"
+  aria-label={ariaLabel}
+>
+  <a
+    href={`/portfolio/${slug}`}
+    class="absolute inset-0 z-10"
+    aria-label={`View case study for ${clientName}`}
+    tabindex="-1"
+  ></a>
+
+  <div class="relative z-0">
+    <!-- Client Logo/Name -->
+    <div class="mb-4">
+      {clientLogo ? (
+        <img
+          src={clientLogo}
+          alt={`${clientName} logo`}
+          class="h-8 w-auto object-contain"
+          loading="lazy"
+        />
+      ) : (
+        <h3 class="text-lg font-semibold text-white">{clientName}</h3>
+      )}
+    </div>
+
+    <!-- Challenge Description -->
+    <p class="text-gray-300 mb-4 line-clamp-2">{challenge}</p>
+
+    <!-- Result Metric -->
+    <div class="mb-4">
+      <p class="text-2xl font-bold text-blue-400">{resultMetric}</p>
+    </div>
+
+    <!-- Result Description -->
+    <p class="text-sm text-gray-400 mb-4 line-clamp-2">{result}</p>
+
+    <!-- CTA Button -->
+    <span
+      class="inline-flex items-center text-sm font-medium text-blue-400 group-hover:text-blue-300 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#050507] rounded"
+    >
+      View Case Study
+      <svg
+        class="ml-2 w-4 h-4 transition-transform duration-150 group-hover:translate-x-1"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 5l7 7-7 7"
+        />
+      </svg>
+    </span>
+  </div>
+</article>
