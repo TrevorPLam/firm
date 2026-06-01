@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Startseite - Ihre Agentur">
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="px-6 py-20 md:py-32">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+          Exzellenz im Digitalen Marketing
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          Wir helfen Unternehmen, durch strategische digitale Marketinglösungen zu wachsen
+        </p>
+        <div class="flex gap-4 justify-center">
+          <a href="/de/contact" class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            Loslegen
+          </a>
+          <a href="/de/about" class="px-8 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+            Mehr Erfahren
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Preview -->
+    <section class="px-6 py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Unsere Dienstleistungen</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="p-6 bg-white rounded-lg shadow-sm">
+            <h3 class="text-xl font-semibold mb-3">SEO-Optimierung</h3>
+            <p class="text-gray-600">Verbessern Sie Ihre Suchmaschinenplatzierung und generieren Sie organischen Traffic</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-sm">
+            <h3 class="text-xl font-semibold mb-3">Content-Marketing</h3>
+            <p class="text-gray-600">Engagierende Inhalte, die bei Ihrer Zielgruppe Resonanz finden</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-sm">
+            <h3 class="text-xl font-semibold mb-3">Social Media</h3>
+            <p class="text-gray-600">Bauen Sie Ihre Markenpräsenz auf allen Plattformen auf</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

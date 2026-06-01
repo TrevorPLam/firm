@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Accueil - Votre Agence">
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="px-6 py-20 md:py-32">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+          Excellence en Marketing Digital
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          Nous aidons les entreprises à grandir grâce à des solutions stratégiques de marketing digital
+        </p>
+        <div class="flex gap-4 justify-center">
+          <a href="/fr/contact" class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            Commencer
+          </a>
+          <a href="/fr/about" class="px-8 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+            En Savoir Plus
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Preview -->
+    <section class="px-6 py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Nos Services</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="p-6 bg-white rounded-lg shadow-sm">
+            <h3 class="text-xl font-semibold mb-3">Optimisation SEO</h3>
+            <p class="text-gray-600">Améliorez votre classement dans les moteurs de recherche et générez du trafic organique</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-sm">
+            <h3 class="text-xl font-semibold mb-3">Marketing de Contenu</h3>
+            <p class="text-gray-600">Du contenu engageant qui résonne avec votre audience</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-sm">
+            <h3 class="text-xl font-semibold mb-3">Réseaux Sociaux</h3>
+            <p class="text-gray-600">Construisez votre présence de marque sur toutes les plateformes</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

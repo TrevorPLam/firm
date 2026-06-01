@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Inicio - Tu Agencia">
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="px-6 py-20 md:py-32">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+          Excelencia en Marketing Digital
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          Ayudamos a las empresas a crecer a través de soluciones estratégicas de marketing digital
+        </p>
+        <div class="flex gap-4 justify-center">
+          <a href="/es/contact" class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            Comenzar
+          </a>
+          <a href="/es/about" class="px-8 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+            Saber Más
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Preview -->
+    <section class="px-6 py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Nuestros Servicios</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="p-6 bg-white rounded-lg shadow-sm">
+            <h3 class="text-xl font-semibold mb-3">Optimización SEO</h3>
+            <p class="text-gray-600">Mejora tu posicionamiento en buscadores y genera tráfico orgánico</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-sm">
+            <h3 class="text-xl font-semibold mb-3">Marketing de Contenidos</h3>
+            <p class="text-gray-600">Contenido atractivo que resuena con tu audiencia</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-sm">
+            <h3 class="text-xl font-semibold mb-3">Redes Sociales</h3>
+            <p class="text-gray-600">Construye tu presencia de marca en todas las plataformas</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
