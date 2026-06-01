@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((service) => ({
+    params: { slug: service.id.replace(/\.md$/, '') },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const { data } = service;
+---
+
+<Layout
+  title={`${data.title} - Your Agency`}
+  description={data.description}
+>
+  <main class="min-h-screen bg-[#050507]">
+    <!-- Hero Section -->
+    <section
+      class="py-20 px-6"
+      aria-labelledby="service-heading"
+    >
+      <div class="max-w-6xl mx-auto">
+        <nav aria-label="Breadcrumb" class="mb-8">
+          <ol class="flex items-center space-x-2 text-sm text-gray-400">
+            <li>
+              <a href="/" class="hover:text-blue-400 transition-colors duration-150">Home</a>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li>
+              <a href="/services" class="hover:text-blue-400 transition-colors duration-150">Services</a>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li class="text-white" aria-current="page">{data.title}</li>
+          </ol>
+        </nav>
+        <h1
+          id="service-heading"
+          class="text-4xl md:text-5xl font-bold text-white mb-6"
+        >
+          {data.title}
+        </h1>
+        <p class="text-xl text-gray-400 max-w-3xl">
+          {data.description}
+        </p>
+      </div>
+    </section>
+
+    <!-- Service Description -->
+    <section
+      class="py-12 px-6"
+      aria-labelledby="description-heading"
+    >
+      <div class="max-w-6xl mx-auto">
+        <h2 id="description-heading" class="text-2xl font-bold text-white mb-6">
+          What We Offer
+        </h2>
+        <div class="prose prose-invert max-w-none text-gray-300">
+          <service.Content />
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Overview -->
+    <section
+      class="py-12 px-6 bg-[#111111]"
+      aria-labelledby="process-heading"
+    >
+      <div class="max-w-6xl mx-auto">
+        <h2 id="process-heading" class="text-2xl font-bold text-white mb-6">
+          Our Process
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 border border-white/10 rounded-xl">
+            <div class="text-blue-400 text-3xl font-bold mb-2">1</div>
+            <h3 class="text-lg font-semibold text-white mb-2">Discovery</h3>
+            <p class="text-gray-400 text-sm">
+              We analyze your current situation, goals, and target audience to develop a tailored strategy.
+            </p>
+          </div>
+          <div class="p-6 border border-white/10 rounded-xl">
+            <div class="text-blue-400 text-3xl font-bold mb-2">2</div>
+            <h3 class="text-lg font-semibold text-white mb-2">Strategy</h3>
+            <p class="text-gray-400 text-sm">
+              We create a comprehensive plan with clear milestones, KPIs, and deliverables.
+            </p>
+          </div>
+          <div class="p-6 border border-white/10 rounded-xl">
+            <div class="text-blue-400 text-3xl font-bold mb-2">3</div>
+            <h3 class="text-lg font-semibold text-white mb-2">Execution</h3>
+            <p class="text-gray-400 text-sm">
+              We implement the strategy with continuous monitoring, optimization, and reporting.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section
+      class="py-20 px-6"
+      aria-labelledby="cta-heading"
+    >
+      <div class="max-w-4xl mx-auto text-center bg-[#111111] border border-white/10 rounded-xl p-12">
+        <h2 id="cta-heading" class="text-3xl font-bold text-white mb-4">
+          Ready to Get Started?
+        </h2>
+        <p class="text-gray-400 mb-8">
+          Contact us to discuss how our {data.title} services can help you achieve your goals.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-3 rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#111111]"
+        >
+          Get in Touch
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
